@@ -1,6 +1,7 @@
 package org.danort;
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -39,13 +40,32 @@ public class App {
             int howMany = width * height;
             int sum = 0;
 
-            for (int c = 0; c < width; c++) {
-                for (int r = 0; r < height; r++) {
+            for (int col = 0; col < width; col++) {
+                for (int row = 0; row < height; row++) {
                     // ANDing the resulting color integer with 255 (0xff) in order to get the result
                     // for the first channel (blue) ... since this is for grayscaled images all
                     // non-alpha channels should have the same level of light, otherwise there would
                     // be color seen
-                    sum += (bi.getRGB(c, r) & 0xff);
+                    Color color = new Color(bi.getRGB(col, row));
+
+                    int max = 0;
+
+                    int r = color.getRed();
+                    if (r > max) {
+                        max = r;
+                    }
+
+                    int g = color.getGreen();
+                    if (g > max) {
+                        max = g;
+                    }
+
+                    int b = color.getBlue();
+                    if (b > max) {
+                        max = b;
+                    }
+
+                    sum += max;
                 }
             }
 
@@ -59,4 +79,5 @@ public class App {
         }
 
     }
+
 }
