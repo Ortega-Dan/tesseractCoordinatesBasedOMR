@@ -38,40 +38,25 @@ public class App {
             System.out.println(width + "x" + height);
 
             int howMany = width * height;
-            int sum = 0;
+            float sum = 0;
 
             for (int col = 0; col < width; col++) {
                 for (int row = 0; row < height; row++) {
-                    // ANDing the resulting color integer with 255 (0xff) in order to get the result
-                    // for the first channel (blue) ... since this is for grayscaled images all
-                    // non-alpha channels should have the same level of light, otherwise there would
-                    // be color seen
+
                     Color color = new Color(bi.getRGB(col, row));
 
-                    int max = 0;
+                    float grayScalePixel = (0.299f * color.getRed()) + (0.587f * color.getGreen())
+                            + (0.114f * color.getBlue());
 
-                    int r = color.getRed();
-                    if (r > max) {
-                        max = r;
-                    }
-
-                    int g = color.getGreen();
-                    if (g > max) {
-                        max = g;
-                    }
-
-                    int b = color.getBlue();
-                    if (b > max) {
-                        max = b;
-                    }
-
-                    sum += max;
+                    sum += grayScalePixel;
                 }
             }
 
-            System.out.println("Sum = " + sum);
-            int avg = sum / howMany;
-            System.out.println("Avg = " + sum / howMany);
+            int sumInt = (int) sum;
+
+            System.out.println("Sum = " + sumInt);
+            int avg = sumInt / howMany;
+            System.out.println("Avg = " + sumInt / howMany);
             int lightOrWhitePercentage = (avg * 100) / 255;
             System.out.println("Light or white % = " + lightOrWhitePercentage);
             System.out.println("Pixelation % = " + (lightOrWhitePercentage - 100) * -1);
