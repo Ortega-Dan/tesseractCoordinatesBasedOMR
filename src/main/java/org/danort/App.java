@@ -59,7 +59,8 @@ public class App {
             System.out.println("Avg = " + sumInt / howMany);
             int lightOrWhitePercentage = (avg * 100) / 255;
             System.out.println("Light or white % = " + lightOrWhitePercentage);
-            System.out.println("Pixelation % = " + (lightOrWhitePercentage - 100) * -1);
+            int pixelationPercentage = (lightOrWhitePercentage - 100) * -1;
+            System.out.println("Pixelation % = " + pixelationPercentage);
 
         }
 
